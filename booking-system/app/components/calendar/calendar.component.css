@@ -1,0 +1,140 @@
+.calendar-card {
+  display: grid;
+  gap: var(--space-5);
+  padding: var(--space-5);
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+}
+
+.calendar-header {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.section-kicker {
+  margin-bottom: var(--space-2);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.calendar-actions {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+  align-items: center;
+}
+
+.month-label {
+  text-align: center;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.nav-button {
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: white;
+  color: var(--color-primary);
+  transition: transform 180ms ease, border-color 180ms ease;
+}
+
+.nav-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  border-color: rgba(233, 69, 96, 0.35);
+}
+
+.weekdays,
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: var(--space-2);
+}
+
+.weekdays span {
+  text-align: center;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--color-muted);
+  text-transform: uppercase;
+}
+
+.day-placeholder,
+.day-button {
+  aspect-ratio: 1 / 1;
+}
+
+.day-button {
+  position: relative;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  background: rgba(26, 26, 46, 0.04);
+  color: var(--color-text);
+  transition:
+    transform 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease;
+}
+
+.day-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  border-color: rgba(233, 69, 96, 0.35);
+}
+
+.day-button--today {
+  border-color: rgba(26, 26, 46, 0.22);
+  background: rgba(26, 26, 46, 0.08);
+}
+
+.day-button--selected {
+  background: var(--color-primary);
+  color: white;
+}
+
+.day-button--past {
+  background: rgba(208, 208, 208, 0.3);
+  color: var(--color-muted);
+}
+
+.day-number {
+  font-weight: 700;
+}
+
+.booking-indicator {
+  position: absolute;
+  bottom: 0.55rem;
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 50%;
+  background: var(--color-accent);
+}
+
+.day-button--selected .booking-indicator {
+  background: white;
+}
+
+@media (min-width: 375px) {
+  .calendar-card {
+    padding: var(--space-6);
+  }
+}
+
+@media (min-width: 768px) {
+  .calendar-actions {
+    grid-template-columns: auto 1fr auto;
+  }
+}
+
+@media (min-width: 1024px) {
+  .calendar-card {
+    gap: var(--space-6);
+  }
+}

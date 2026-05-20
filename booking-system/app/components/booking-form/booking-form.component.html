@@ -1,0 +1,50 @@
+<section class="form-card" aria-labelledby="booking-form-heading">
+  <div class="form-header">
+    <div>
+      <p class="section-kicker">Step 3</p>
+      <h3 id="booking-form-heading">Confirm your details</h3>
+    </div>
+
+    <div class="appointment-summary">
+      <span>Selected slot</span>
+      <strong>{{ date }} at {{ time }}</strong>
+    </div>
+  </div>
+
+  <form class="booking-form" [formGroup]="bookingForm" (ngSubmit)="submitBooking()" novalidate>
+    <label class="field-group" for="booking-name">
+      <span>Name</span>
+      <input id="booking-name" type="text" formControlName="name" autocomplete="name" placeholder="Alex Johnson" />
+      <small *ngIf="nameControl.invalid && (nameControl.touched || hasSubmitted)" class="field-error">
+        Name is required.
+      </small>
+    </label>
+
+    <label class="field-group" for="booking-email">
+      <span>Email</span>
+      <input
+        id="booking-email"
+        type="email"
+        formControlName="email"
+        autocomplete="email"
+        placeholder="alex@example.com"
+      />
+      <small *ngIf="emailControl.hasError('required') && (emailControl.touched || hasSubmitted)" class="field-error">
+        Email is required.
+      </small>
+      <small *ngIf="emailControl.hasError('email') && (emailControl.touched || hasSubmitted)" class="field-error">
+        Enter a valid email address.
+      </small>
+    </label>
+
+    <button type="submit" class="submit-button">Confirm booking</button>
+  </form>
+
+  <p *ngIf="successMessage" class="feedback-message feedback-message--success">
+    {{ successMessage }}
+  </p>
+
+  <p *ngIf="submissionError" class="feedback-message feedback-message--error">
+    {{ submissionError }}
+  </p>
+</section>

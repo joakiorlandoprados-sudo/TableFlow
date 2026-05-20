@@ -1,0 +1,121 @@
+.form-card {
+  display: grid;
+  gap: var(--space-5);
+  padding: var(--space-5);
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+}
+
+.form-header {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.section-kicker {
+  margin-bottom: var(--space-2);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.appointment-summary {
+  display: grid;
+  gap: var(--space-1);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  background: rgba(26, 26, 46, 0.05);
+  color: var(--color-primary);
+}
+
+.appointment-summary span {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-muted);
+}
+
+.booking-form {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.field-group {
+  display: grid;
+  gap: var(--space-2);
+  font-weight: 500;
+}
+
+.field-group input {
+  width: 100%;
+  padding: 0.95rem 1rem;
+  border: 1px solid rgba(26, 26, 46, 0.16);
+  border-radius: var(--radius-md);
+  background: white;
+  color: var(--color-text);
+}
+
+.field-group input::placeholder {
+  color: var(--color-muted);
+}
+
+.submit-button {
+  padding: 1rem 1.2rem;
+  border: 0;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--color-accent), #ff6e77);
+  color: white;
+  font-weight: 700;
+  transition: transform 180ms ease, filter 180ms ease;
+}
+
+.submit-button:hover {
+  transform: translateY(-1px);
+  filter: saturate(1.04);
+}
+
+.field-error {
+  color: var(--color-danger);
+}
+
+.feedback-message {
+  padding: 0.95rem 1rem;
+  border-radius: var(--radius-md);
+}
+
+.feedback-message--success {
+  background: rgba(46, 204, 113, 0.14);
+  color: #218c56;
+}
+
+.feedback-message--error {
+  background: rgba(233, 69, 96, 0.12);
+  color: var(--color-danger);
+}
+
+@media (min-width: 375px) {
+  .form-card {
+    padding: var(--space-6);
+  }
+}
+
+@media (min-width: 768px) {
+  .form-header {
+    grid-template-columns: 1fr auto;
+    align-items: start;
+  }
+}
+
+@media (min-width: 1024px) {
+  .booking-form {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+  }
+
+  .submit-button {
+    grid-column: 1 / -1;
+  }
+}

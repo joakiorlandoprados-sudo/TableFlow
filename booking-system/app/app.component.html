@@ -1,0 +1,70 @@
+<div class="app-shell">
+  <header class="hero-panel">
+    <p class="eyebrow">Angular portfolio project</p>
+    <h1>TableFlow</h1>
+    <p class="hero-copy">
+      A responsive appointment booking experience with real-time availability, accessible interactions, and
+      LocalStorage persistence.
+    </p>
+
+    <div class="hero-highlights">
+      <div class="highlight-card">
+        <span>01</span>
+        <strong>Pick a future date</strong>
+      </div>
+      <div class="highlight-card">
+        <span>02</span>
+        <strong>Choose an available slot</strong>
+      </div>
+      <div class="highlight-card">
+        <span>03</span>
+        <strong>Confirm your booking</strong>
+      </div>
+    </div>
+  </header>
+
+  <main class="content-grid">
+    <section class="booking-panel">
+      <div class="panel-heading">
+        <p class="section-kicker">Booking flow</p>
+        <h2>Reserve an appointment in minutes</h2>
+        <p>
+          Select a date from the calendar, review live availability, and complete the booking with your contact
+          details.
+        </p>
+      </div>
+
+      <p *ngIf="confirmationMessage" class="confirmation-banner">{{ confirmationMessage }}</p>
+
+      <div class="flow-layout">
+        <app-calendar [selectedDate]="selectedDate" (dateSelected)="handleDateSelected($event)"></app-calendar>
+
+        <div class="flow-stack">
+          <app-time-selector
+            *ngIf="selectedDate"
+            [selectedDate]="selectedDate"
+            [selectedTime]="selectedTime"
+            (timeSelected)="handleTimeSelected($event)"
+          ></app-time-selector>
+
+          <div *ngIf="!selectedDate" class="empty-placeholder">
+            Select a future date to unlock available appointment times.
+          </div>
+
+          <app-booking-form
+            *ngIf="selectedDate && selectedTime"
+            [date]="selectedDate"
+            [time]="selectedTime"
+            (bookingConfirmed)="handleBookingConfirmed()"
+          ></app-booking-form>
+
+          <div *ngIf="selectedDate && !selectedTime" class="empty-placeholder">
+            Pick an available time slot to continue to the confirmation form.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <app-booking-list></app-booking-list>
+  </main>
+</div>

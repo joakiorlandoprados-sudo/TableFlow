@@ -1,0 +1,52 @@
+<section class="calendar-card" aria-labelledby="calendar-heading">
+  <div class="calendar-header">
+    <div>
+      <p class="section-kicker">Step 1</p>
+      <h3 id="calendar-heading">Choose a date</h3>
+    </div>
+
+    <div class="calendar-actions">
+      <button
+        type="button"
+        class="nav-button"
+        aria-label="View previous month"
+        (click)="goToPreviousMonth()"
+        [disabled]="!(canGoToPreviousMonth$ | async)"
+      >
+        Previous
+      </button>
+
+      <p class="month-label">{{ monthLabel$ | async }}</p>
+
+      <button type="button" class="nav-button" aria-label="View next month" (click)="goToNextMonth()">
+        Next
+      </button>
+    </div>
+  </div>
+
+  <div class="weekdays" aria-hidden="true">
+    <span *ngFor="let weekDayLabel of weekDayLabels">{{ weekDayLabel }}</span>
+  </div>
+
+  <div class="calendar-grid">
+    <ng-container *ngFor="let day of calendarDays$ | async; trackBy: trackByDay">
+      <div *ngIf="day.isPlaceholder" class="day-placeholder" aria-hidden="true"></div>
+
+      <button
+        *ngIf="!day.isPlaceholder"
+        type="button"
+        class="day-button"
+        [class.day-button--today]="day.isToday"
+        [class.day-button--selected]="day.isSelected"
+        [class.day-button--past]="day.isPast"
+        [disabled]="!day.isInteractive"
+        [attr.aria-pressed]="day.isSelected"
+        [attr.aria-label]="day.isoDate"
+        (click)="selectDate(day)"
+      >
+        <span class="day-number">{{ day.dayNumber }}</span>
+        <span *ngIf="day.hasConfirmedBooking" class="booking-indicator" aria-hidden="true"></span>
+      </button>
+    </ng-container>
+  </div>
+</section>

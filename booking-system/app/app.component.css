@@ -1,0 +1,142 @@
+.app-shell {
+  width: min(100%, 75rem);
+  margin: 0 auto;
+  padding: var(--space-5);
+}
+
+.hero-panel,
+.booking-panel {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-panel {
+  display: grid;
+  gap: var(--space-5);
+  padding: var(--space-6);
+  background:
+    radial-gradient(circle at top right, rgba(233, 69, 96, 0.2), transparent 32%),
+    linear-gradient(145deg, rgba(26, 26, 46, 0.97), rgba(34, 34, 61, 0.95));
+  border-radius: calc(var(--radius-lg) + 0.4rem);
+  color: white;
+  box-shadow: 0 30px 70px -45px rgba(26, 26, 46, 0.8);
+}
+
+.hero-panel h1,
+.hero-panel p,
+.hero-panel strong {
+  color: inherit;
+}
+
+.eyebrow,
+.section-kicker {
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.eyebrow {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.hero-copy {
+  max-width: 42rem;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.hero-highlights {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.highlight-card {
+  display: grid;
+  gap: var(--space-1);
+  padding: var(--space-4);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md);
+}
+
+.highlight-card span {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.content-grid {
+  display: grid;
+  gap: var(--space-6);
+  margin-top: var(--space-6);
+}
+
+.booking-panel {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.panel-heading {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.section-kicker {
+  color: var(--color-accent);
+}
+
+.confirmation-banner,
+.empty-placeholder {
+  padding: 1rem 1.1rem;
+  border-radius: var(--radius-md);
+}
+
+.confirmation-banner {
+  background: rgba(46, 204, 113, 0.14);
+  color: #218c56;
+  border: 1px solid rgba(46, 204, 113, 0.18);
+}
+
+.flow-layout {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.flow-stack {
+  display: grid;
+  gap: var(--space-5);
+  align-content: start;
+}
+
+.empty-placeholder {
+  background: rgba(26, 26, 46, 0.04);
+  border: 1px dashed rgba(26, 26, 46, 0.12);
+  color: var(--color-muted);
+}
+
+@media (min-width: 375px) {
+  .app-shell {
+    padding: var(--space-6);
+  }
+
+  .hero-panel {
+    padding: var(--space-7);
+  }
+}
+
+@media (min-width: 768px) {
+  .hero-highlights {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .flow-layout {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.95fr);
+    align-items: start;
+  }
+}
+
+@media (min-width: 1024px) {
+  .content-grid {
+    gap: var(--space-7);
+  }
+}

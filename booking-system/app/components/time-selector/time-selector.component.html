@@ -1,0 +1,29 @@
+<section class="time-card" aria-labelledby="time-selector-heading">
+  <div class="time-header">
+    <div>
+      <p class="section-kicker">Step 2</p>
+      <h3 id="time-selector-heading">Select a time slot</h3>
+    </div>
+
+    <p class="selected-date">{{ formattedDate$ | async }}</p>
+  </div>
+
+  <div class="time-slots">
+    <button
+      *ngFor="let timeSlot of timeSlots$ | async; trackBy: trackByTime"
+      type="button"
+      class="time-button"
+      [class.time-button--selected]="timeSlot.isSelected"
+      [class.time-button--taken]="timeSlot.isTaken"
+      [disabled]="timeSlot.isTaken"
+      (click)="selectTime(timeSlot)"
+    >
+      <span>{{ timeSlot.time }}</span>
+      <small>{{ timeSlot.isTaken ? 'Taken' : 'Available' }}</small>
+    </button>
+  </div>
+
+  <p *ngIf="!(hasAvailableSlots$ | async)" class="availability-message">
+    All appointments for this date are already booked. Please choose another day.
+  </p>
+</section>

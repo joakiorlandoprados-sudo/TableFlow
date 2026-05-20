@@ -1,0 +1,58 @@
+<section class="booking-list-card" aria-labelledby="booking-list-heading">
+  <div class="booking-list-header">
+    <div>
+      <p class="section-kicker">Schedule overview</p>
+      <h2 id="booking-list-heading">Upcoming bookings</h2>
+    </div>
+
+    <label class="toggle-control">
+      <input type="checkbox" (change)="handleCancelledToggle($event)" />
+      <span>Show cancelled bookings</span>
+    </label>
+  </div>
+
+  <ng-container *ngIf="viewModel$ | async as viewModel">
+    <div *ngIf="viewModel.bookings.length; else emptyState" class="booking-items">
+      <article
+        *ngFor="let booking of viewModel.bookings; trackBy: trackByBookingId"
+        class="booking-item"
+        [class.booking-item--cancelled]="booking.status === 'cancelled'"
+      >
+        <div class="booking-item__content">
+          <div class="booking-item__summary">
+            <h3>{{ booking.displayDate }}</h3>
+            <span class="time-pill">{{ booking.time }}</span>
+          </div>
+
+          <p>{{ booking.name }}</p>
+          <a [href]="'mailto:' + booking.email">{{ booking.email }}</a>
+        </div>
+
+        <div class="booking-item__actions">
+          <span class="status-badge" [class.status-badge--cancelled]="booking.status === 'cancelled'">
+            {{ booking.status }}
+          </span>
+
+          <button
+            *ngIf="booking.status === 'confirmed'"
+            type="button"
+            class="cancel-button"
+            (click)="cancelBooking(booking.id)"
+          >
+            Cancel
+          </button>
+        </div>
+      </article>
+    </div>
+
+    <ng-template #emptyState>
+      <p class="empty-state" *ngIf="!viewModel.hasAnyBookings">
+        No bookings have been created yet.
+      </p>
+
+      <p class="empty-state" *ngIf="viewModel.hasAnyBookings && !viewModel.hasConfirmedBookings">
+        No confirmed bookings are scheduled right now.
+      </p>
+    </ng-template>
+  </ng-container>
+</section>
