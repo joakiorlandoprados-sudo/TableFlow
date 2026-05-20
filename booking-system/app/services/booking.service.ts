@@ -6,8 +6,7 @@ import { Booking } from '../models/booking.model';
 @Injectable({ providedIn: 'root' })
 export class BookingService {
   private readonly storageKey = 'bookeasy.bookings';
-  private readonly bookingsSubject = new BehaviorSubject<Booking[]>(this.loadFromStorage());
-
+  private readonly bookingsSubject = new BehaviorSubject<Booking[]>(this.loadInitialData());
   /**
    * Returns a reactive stream of all stored bookings.
    */
@@ -62,6 +61,38 @@ export class BookingService {
     return this.bookingsSubject.value.some(
       (booking) => booking.date === date && booking.time === time && booking.status === 'confirmed',
     );
+  }
+
+  private loadInitialData(): Booking[] {
+    const stored = this.loadFromStorage();
+
+    if (stored.length > 0) {
+      return stored;
+    }
+
+    const seed: Booking[] = [
+      {
+        id: crypto.randomUUID(),
+        date: '2026-06-10',
+        time: '10:00',
+        name: 'Laura Martínez',
+        email: 'laura@example.com',
+        status: 'confirmed',
+        createdAt: new Date().toISOString(),
+      },
+      {
+        id: crypto.randomUUID(),
+        date: '2026-06-15',
+        time: '15:00',
+        name: 'Carlos Ruiz',
+        email: 'carlos@example.com',
+        status: 'confirmed',
+        createdAt: new Date().toISOString(),
+      },
+    ];
+
+    this.saveToStorage(seed);
+    return seed;
   }
 
   private loadFromStorage(): Booking[] {

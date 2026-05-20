@@ -4,57 +4,75 @@ TableFlow is a polished appointment booking system built as an Angular portfolio
 
 The project is intentionally structured to feel production-minded while staying approachable for a junior-to-mid developer code review.
 
+🔗 **Live demo:** [tableflow-booking-system.netlify.app](https://tableflow-booking-system.netlify.app)  
+📁 **Repository:** [github.com/joakiorlandoprados-sudo/TableFlow.git](https://github.com/joakiorlandoprados-sudo/TableFlow.git)
+
+---
+
 ## Tech Stack
 
-- Angular 21 with standalone components
+- Angular 17+ with standalone components
 - TypeScript
-- CSS
+- CSS (no frameworks)
 - RxJS
-- LocalStorage
+- LocalStorage (REST API in v2)
+
+---
 
 ## Run Locally
 
-1. Install dependencies with `npm install`
-2. Start the development server with `ng serve`
-3. Open `http://localhost:4200/`
+**Requirements:** Node.js 18+, Angular CLI 17+
+
+```bash
+git clone https://github.com/joakiorlandoprados-sudo/tableflow-booking-system.git
+cd tableflow-booking-system
+npm install
+ng serve
+```
+
+Open `http://localhost:4200/`
+
+---
 
 ## Features
 
-- Monthly calendar with future-date selection
-- Real-time time-slot availability for each selected day
-- Reactive booking flow powered by a LocalStorage-backed service
-- Booking list with cancellation support instead of destructive deletion
-- Optional visibility for cancelled appointments
+- Monthly calendar with future-date selection and month navigation
+- Real-time time-slot availability — taken slots are blocked and visually disabled
+- Booking form with inline validation (name + email)
+- Reactive booking list powered by a LocalStorage-backed service
+- Cancellation support — records are soft-deleted, not removed
+- Toggle to show/hide cancelled appointments
 - Responsive, accessible UI with visible focus states
 
-## Notes
-
-LocalStorage will be replaced by REST API in v2.
+---
 
 ## Folder Structure
 
-```text
-booking-system/
-├── index.html
-├── styles.css
-├── main.ts
-└── app/
-    ├── app.component.ts
-    ├── app.component.html
-    ├── app.component.css
-    ├── models/
-    │   └── booking.model.ts
-    ├── services/
-    │   └── booking.service.ts
-    └── components/
-        ├── calendar/
-        ├── time-selector/
-        ├── booking-form/
-        └── booking-list/
+```
+src/app/
+├── models/
+│   └── booking.model.ts        # Booking interface + types
+├── services/
+│   └── booking.service.ts      # State management + LocalStorage
+└── components/
+    ├── calendar/                # Monthly calendar with date selection
+    ├── time-selector/           # Slot availability per selected date
+    ├── booking-form/            # Form with validation
+    └── booking-list/            # List, cancellation, toggle
 ```
 
-- `booking-system/main.ts` bootstraps the standalone Angular application.
-- `booking-system/app/services` contains the LocalStorage-backed booking state.
-- `booking-system/app/models` defines the booking domain model.
-- `booking-system/app/components` contains focused UI pieces for each booking step.
-- `booking-system/app/app.component.*` coordinates the overall user flow.
+---
+
+## Roadmap
+
+- [ ] Replace LocalStorage with Node.js + Express REST API
+- [ ] Add MongoDB persistence layer
+- [ ] Admin panel for managing all bookings
+
+---
+
+## Author
+
+**Joaquin Prados**  
+Web Developer — Valencia, Spain  
+[GitHub](https://github.com/joakiorlandoprados-sudo)
